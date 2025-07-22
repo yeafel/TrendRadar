@@ -6,14 +6,13 @@ A股
 
 美股
 中美
-美国
+美债
 美联储
 
 政治局
 金融局
 统计局
 全社会用电量
-利率
 
 苹果
 Apple
@@ -31,6 +30,4 @@ gemini
 deepmind
 chatgpt
 openai
-ai
-!gai
 
