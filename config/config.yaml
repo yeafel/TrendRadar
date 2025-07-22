@@ -50,8 +50,6 @@ weight:
 platforms:
   - id: "fastbull"
     name: "法布财经"
-  - id: "ithome"
-    name: "IT之家"
   - id: "wallstreetcn-hot"
     name: "华尔街见闻"
   - id: "thepaper"
