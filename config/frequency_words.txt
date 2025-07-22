@@ -4,6 +4,11 @@
 A股
 港股
 
+恒指
+恒生指数
+沪深
+上证
+
 美股
 中美
 美国
@@ -14,6 +19,8 @@ A股
 统计局
 新质生产力
 全社会用电量
+利率
+银行
 
 苹果
 Apple
@@ -31,8 +38,6 @@ gemini
 deepmind
 chatgpt
 openai
-claude
-Anthropic
 ai
 !gai
 人工智能
