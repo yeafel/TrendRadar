@@ -2080,9 +2080,9 @@ class ReportGenerator:
         if report_data["new_titles"]:
             new_header = ""
             if format_type == "wework":
-                new_header = f"\n\n\n\n🆕 **本次新增热点新闻** (共 {report_data['total_new_count']} 条)\n\n"
+                new_header = f"\n\n\n\n**本次新增热点新闻** (共 {report_data['total_new_count']} 条)\n\n"
             elif format_type == "telegram":
-                new_header = f"\n\n🆕 本次新增热点新闻 (共 {report_data['total_new_count']} 条)\n\n"
+                new_header = f"\n\n本次新增热点新闻 (共 {report_data['total_new_count']} 条)\n\n"
 
             test_content = current_batch + new_header
             if (
