@@ -1543,7 +1543,7 @@ class ReportGenerator:
         if report_data["new_titles"]:
             html += f"""
             <div class="new-section">
-                <h3>🆕 本次新增热点新闻 (共 {report_data['total_new_count']} 条)</h3>
+                <h3>本次新增热点新闻 (共 {report_data['total_new_count']} 条)</h3>
             """
 
             for source_data in report_data["new_titles"]:
@@ -1687,7 +1687,7 @@ class ReportGenerator:
         else:
             formatted_title = cleaned_title
 
-        title_prefix = "🆕 " if title_data["is_new"] else ""
+        title_prefix = "[新增]" if title_data["is_new"] else ""
 
         if show_source:
             result = f"[{title_data['source_name']}] {title_prefix}{formatted_title}"
