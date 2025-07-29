@@ -1176,75 +1176,6 @@ def prepare_report_data(
                     }
                     source_titles.append(processed_title)
 
-        now = TimeHelper.get_beijing_time()
-        html += f"<p>总标题数: {total_titles}</p>"
-        html += f"<p>生成时间: {now.strftime('%Y-%m-%d %H:%M:%S')}</p>"
-
-        if report_data["failed_ids"]:
-            html += """
-            <div class="error">
-                <h2>请求失败的平台</h2>
-                <ul>
-            """
-            for id_value in report_data["failed_ids"]:
-                html += f"<li>{ReportGenerator._html_escape(id_value)}</li>"
-            html += """
-                </ul>
-            </div>
-            """
-
-        html += """
-            <table>
-                <tr>
-                    <th>排名</th>
-                    <th>频率词</th>
-                    <th>出现次数</th>
-                    <th>占比</th>
-                    <th>相关标题</th>
-                </tr>
-        """
-
-        for i, stat in enumerate(report_data["stats"], 1):
-            formatted_titles = []
-
-            for title_data in stat["titles"]:
-                formatted_title = ReportGenerator._format_title_html(title_data)
-                formatted_titles.append(formatted_title)
-
-            escaped_word = ReportGenerator._html_escape(stat["word"])
-            html += f"""
-                <tr>
-                    <td>{i}</td>
-                    <td class="word">{escaped_word}</td>
-                    <td class="count">{stat['count']}</td>
-                    <td class="percentage">{stat.get('percentage', 0)}%</td>
-                    <td class="titles">{"<br>".join(formatted_titles)}</td>
-                </tr>
-            """
-
-        html += """
-            </table>
-        """
-
-        if report_data["new_titles"]:
-            html += f"""
-            <div class="new-section">
-                <h3>本次新增热点新闻 (共 {report_data['total_new_count']} 条)</h3>
-            """
-
-            for source_data in report_data["new_titles"]:
-                escaped_source = ReportGenerator._html_escape(
-                    source_data["source_name"]
-                )
-                html += (
-                    f"<h4>{escaped_source} ({len(source_data['titles'])} 条)</h4><ul>"
-                )
-
-                for title_data in source_data["titles"]:
-                    title_data_copy = title_data.copy()
-                    title_data_copy["is_new"] = False
-                    formatted_title = ReportGenerator._format_title_html(
-                        title_data_copy
                 if source_titles:
                     processed_new_titles.append(
                         {
@@ -2015,9 +1946,6 @@ def split_content_into_batches(
         for source_data in report_data["new_titles"]:
             source_header = ""
             if format_type == "wework":
-                new_header = f"\n\n\n\n**本次新增热点新闻** (共 {report_data['total_new_count']} 条)\n\n"
-            elif format_type == "telegram":
-                new_header = f"\n\n本次新增热点新闻 (共 {report_data['total_new_count']} 条)\n\n"
                 source_header = f"**{source_data['source_name']}** ({len(source_data['titles'])} 条):\n\n"
             elif format_type == "telegram":
                 source_header = f"{source_data['source_name']} ({len(source_data['titles'])} 条):\n\n"
@@ -2045,7 +1973,6 @@ def split_content_into_batches(
             # 原子性检查：来源标题+第一条新闻
             source_with_first_news = source_header + first_news_line
             test_content = current_batch + source_with_first_news
->>>>>>> upstream/master
 
             if (
                 len(test_content.encode("utf-8")) + len(base_footer.encode("utf-8"))
