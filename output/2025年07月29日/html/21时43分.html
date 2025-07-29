@@ -1,0 +1,95 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>频率词统计报告</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            h1, h2 { color: #333; }
+            table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            tr:nth-child(even) { background-color: #f9f9f9; }
+            .word { font-weight: bold; }
+            .count { text-align: center; }
+            .percentage { text-align: center; }
+            .titles { max-width: 500px; }
+            .source { color: #666; font-style: italic; }
+            .error { color: #d9534f; }
+            .news-link { 
+                color: #007bff; 
+                text-decoration: none; 
+                border-bottom: 1px dotted #007bff;
+            }
+            .news-link:hover { 
+                color: #0056b3; 
+                text-decoration: underline; 
+            }
+            .news-link:visited { 
+                color: #6f42c1; 
+            }
+            .no-link { 
+                color: #333; 
+            }
+            .new-title {
+                background-color: #fff3cd;
+                border: 1px solid #ffc107;
+                border-radius: 3px;
+                padding: 2px 6px;
+                margin: 2px 0;
+            }
+            .new-section {
+                background-color: #d1ecf1;
+                border: 1px solid #bee5eb;
+                border-radius: 5px;
+                padding: 10px;
+                margin-top: 10px;
+            }
+            .new-section h3 {
+                color: #0c5460;
+                margin-top: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>频率词统计报告</h1>
+    <p>报告类型: 实时分析</p><p>总标题数: 61</p><p>生成时间: 2025-07-29 21:43:53</p>
+        <table>
+            <tr>
+                <th>排名</th>
+                <th>频率词</th>
+                <th>出现次数</th>
+                <th>占比</th>
+                <th>相关标题</th>
+            </tr>
+    
+            <tr>
+                <td>1</td>
+                <td class="word">美股 中美 美债 美联储</td>
+                <td class="count">4</td>
+                <td class="percentage">6.56%</td>
+                <td class="titles"><div class='new-title'>🆕 [法布财经] <a href="https://www.fastbull.com/cn/fastshort/3578445_101_1" target="_blank" class="news-link">【行情】美股盘初，主要行业Etf涨跌不一，半导体Etf涨1.5%，科技行业Etf涨1.1%，医疗业Etf跌1.5%。</a> <font color='red'><strong>[5 - 25]</strong></font> <font color='grey'>- 21时43分</font></div><br><div class='new-title'>🆕 [华尔街见闻] <a href="https://wallstreetcn.com/articles/3752152" target="_blank" class="news-link">美股盘前暴跌28%！诺和诺德任命新CEO并下调全年指引，减肥药Wegovy销售不及预期</a> [7] <font color='grey'>- 21时43分</font></div><br><div class='new-title'>🆕 [华尔街见闻] <a href="https://wallstreetcn.com/articles/3752129" target="_blank" class="news-link">美股期指、欧股走强，诺和诺德盘前跌超25%，美元创月内新高，欧元跌至五周低点</a> [8] <font color='grey'>- 21时43分</font></div><br><div class='new-title'>🆕 [金十数据] <a href="https://flash.jin10.com/detail/20250729210739835800" target="_blank" class="news-link">美联储：联邦公开市场委员会（FOMC）会议已按计划于上午9点开始。</a> [22] <font color='grey'>- 21时43分</font></div></td>
+            </tr>
+        
+            <tr>
+                <td>2</td>
+                <td class="word">纳指 标普 红利 A股 港股</td>
+                <td class="count">2</td>
+                <td class="percentage">3.28%</td>
+                <td class="titles"><div class='new-title'>🆕 [金十数据] <a href="https://flash.jin10.com/detail/20250729213033347800" target="_blank" class="news-link">美股开盘，道指接近平开，标普500指数涨0.24%、纳指涨0.5%。诺和诺德(NVO.N)跌21%，公司下调2025年销售增长及利润预期。默沙东(MRK.N)跌5.4%，公司宣布裁员计划；波音(BA.N)涨1.5%，二季度业绩超预期。纳斯达克中国金龙指数涨0.7%。</a> <font color='red'><strong>[2]</strong></font> <font color='grey'>- 21时43分</font></div><br><div class='new-title'>🆕 [法布财经] <a href="https://www.fastbull.com/cn/fastshort/3578437_101_1" target="_blank" class="news-link">【行情】标普500指数高开15.85点，涨幅0.25%，报6405.62点；道琼斯工业平均指数低开3.82点，跌幅0.01%，报44833.74点；纳斯达克综合指数高开108.14点，涨幅0.51%，报21286.72点。</a> [7 - 27] <font color='grey'>- 21时43分</font></div></td>
+            </tr>
+        
+            <tr>
+                <td>3</td>
+                <td class="word">苹果 微软 特斯拉 英伟达 谷歌</td>
+                <td class="count">1</td>
+                <td class="percentage">1.64%</td>
+                <td class="titles"><div class='new-title'>🆕 [华尔街见闻] <a href="https://wallstreetcn.com/articles/3752114" target="_blank" class="news-link">不只是卖库存了！报道称英伟达向台积电新订购30万块H20订单</a> [10] <font color='grey'>- 21时43分</font></div></td>
+            </tr>
+        
+        </table>
+    
+    </body>
+    </html>
+    
