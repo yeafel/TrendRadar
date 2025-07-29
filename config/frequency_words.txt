@@ -9,21 +9,18 @@ A股
 美债
 美联储
 !热门
+!回顾
+!速递
 
 政治局
 金融局
 全社会用电量
 
 苹果
-Apple
 微软
 特斯拉
-Tesla
-Microsoft
 英伟达
-NVIDIA
 谷歌
-google
 !水果
 
 gemini
