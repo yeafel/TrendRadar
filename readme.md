@@ -2,15 +2,12 @@
 
 # 🎯TrendRadar
 
-**你的专属热点助手 —— 让手机只推送你真正关心的新闻**
-
-<strong>🚀 最快一分钟部署完毕！从此告别无效刷屏，只看有价值的信息</strong>
+<strong>🚀 最快一分钟部署的热点助手 —— 告别无效刷屏，只看真正关心的新闻资讯</strong>
 
 [![GitHub Stars](https://img.shields.io/github/stars/sansan0/TrendRadar?style=flat-square&logo=github&color=yellow)](https://github.com/sansan0/TrendRadar/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/sansan0/TrendRadar?style=flat-square&logo=github&color=blue)](https://github.com/sansan0/TrendRadar/network/members)
 [![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=flat-square)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.7%2B-3776AB?style=flat-square&logo=python&logoColor=ffdd54)](https://www.python.org/)
-[![Version](https://img.shields.io/badge/version-v2.0.0-green.svg?style=flat-square)](https://github.com/sansan0/TrendRadar)
+[![Version](https://img.shields.io/badge/version-v2.0.2-green.svg?style=flat-square)](https://github.com/sansan0/TrendRadar)
 
 [![企业微信通知](https://img.shields.io/badge/企业微信-通知支持-00D4AA?style=flat-square)](https://work.weixin.qq.com/)
 [![Telegram通知](https://img.shields.io/badge/Telegram-通知支持-00D4AA?style=flat-square)](https://telegram.org/)
@@ -23,9 +20,13 @@
 </div>
 
 
-> 如果本项目对你有所帮助，**点个 Star ⭐** 就是对我最大的支持。
+> 如果本项目帮到了你，**点个 Star ⭐**
 >
-> 遇到问题可以直接提 issues。也可以【硅基茶水间】公众号留言问题。
+> 遇到问题提 issues，或【硅基茶水间】公众号留言
+>
+> 详细步骤和使用说明都有，耐心往下翻，很多地方可以点击展开
+>
+> 本项目以轻量，易部署为目标，主要处理 issues
 
 
 
@@ -47,7 +48,7 @@
 - 抖音
 - 知乎
 
-> _理论上支持 35 个左右，如果你想增加额外的金融类等相关资讯推送，可看最下方的**自定义监控平台**_
+> _理论上支持 35 个左右，如果想额外增加，可看最下方的**自定义监控平台**_
 
 ### **智能推送策略**
 
@@ -59,7 +60,7 @@
 | **当前榜单模式**<br/>`current` | 按时推送 | 当前榜单匹配新闻<br/>+ 新增新闻区域 | 实时热点追踪<br/>了解当前最火的内容 |
 | **增量监控模式**<br/>`incremental` | 有新增才推送 | 新出现的匹配频率词新闻 | 避免重复信息干扰<br/>高频监控场景 |
 
-- **📈 投资者/交易员** → 选择 `incremental`，及时获取新增资讯(建议自建服务器进行 docker 部署，提高检测频率)
+- **📈 投资者/交易员** → 选择 `incremental`，及时获取新增资讯
 - **📰 自媒体人/内容创作者** → 选择 `current`，掌握实时热点趋势  
 - **📋 企业管理者/普通用户** → 选择 `daily`，定时获取完整日报
 
@@ -71,7 +72,7 @@
 
 ### **多渠道实时推送**
 
-支持企业微信、飞书、钉钉、Telegram 主流聊天工具，消息直达手机
+支持**企业微信**、**飞书**、**钉钉**、**Telegram**，消息直达手机
 
 ### **零技术门槛部署**
 
@@ -101,6 +102,25 @@ GitHub 一键 Fork 即可使用，无需编程基础。
 - **小版本更新**：直接在 GitHub 网页编辑器中，用本项目的 `main.py` 代码替换你 fork 仓库中的对应文件 
 - **大版本升级**：从 v1.x 升级到 v2.0 建议删除现有 fork 后重新 fork，这样更省力且避免配置冲突
 
+### 2025/07/28 - v2.0.2
+
+- 重构代码
+- 解决版本号容易被遗漏修改的问题
+
+### 2025/07/27 - v2.0.1
+
+**修复问题**: 
+
+1. docker 的 shell 脚本的换行符为 CRLF 导致的执行异常问题
+2. frequency_words.txt 为空时，导致新闻发送也为空的逻辑问题
+  - 修复后，当你选择 frequency_words.txt 为空时，将**推送所有新闻**，但受限于消息推送大小限制，请做如下调整
+    - 方案一：关闭手机推送，只选择 Github Pages 布置(这是能获得最完整信息的方案，将把所有平台的热点按照你**自定义的热搜算法**进行重新排序)
+    - 方案二：减少推送平台，优先选择**企业微信**或**Telegram**，这两个推送我做了分批推送功能(因为分批推送影响推送体验，且只有这两个平台只给一点点推送容量，所以才不得已做了分批推送功能，但至少能保证获得的信息完整)
+    - 方案三：可与方案二结合，模式选择 current 或 incremental 可有效减少一次性推送的内容 
+
+<details>
+<summary><strong>📝 点击查看历史更新</strong></summary>
+
 ### 2025/07/17 - v2.0.0
 
 **重大重构**：
@@ -112,15 +132,11 @@ GitHub 一键 Fork 即可使用，无需编程基础。
 - `config/config.yaml` - 主配置文件（应用设置、爬虫配置、通知配置、平台配置等）
 - `config/frequency_words.txt` - 关键词配置（监控词汇设置）
 
-
-<details>
-<summary><strong>📝 点击查看历史更新</strong></summary>
-
 ### 2025/07/09 - v1.4.1
 
-**功能新增**：增加增量推送(在 main.py 头部配置 FOCUS_NEW_ONLY)，该开关只关心新话题而非持续热度，只在有新内容时才发通知
+**功能新增**：增加增量推送(在 main.py 头部配置 FOCUS_NEW_ONLY)，该开关只关心新话题而非持续热度，只在有新内容时才发通知。
 
-**修复问题**: 某些情况下，由于新闻本身含有特殊符号导致的偶发性排版异常
+**修复问题**: 某些情况下，由于新闻本身含有特殊符号导致的偶发性排版异常。
 
 ### 2025/06/23 - v1.3.0
 
@@ -588,26 +604,16 @@ platforms:
    ```
 
 
-## ☕ 赞助让代码更香.jpg
+## ☕ 学习交流与1元点赞
 
 <div align="center">
 
-| Wechat | Alipay |
-|:---:|:---:|
-| <img src="https://cdn-1258574687.cos.ap-shanghai.myqcloud.com/img/%2F2025%2F07%2F17%2F2ae0a88d98079f7e876c2b4dc85233c6-9e8025.JPG" width="300" title="微信支付"/> | <img src="https://cdn-1258574687.cos.ap-shanghai.myqcloud.com/img/%2F2025%2F07%2F17%2Fed4f20ab8e35be51f8e84c94e6e239b4-fe4947.JPG" width="300" title="支付宝支付"/> |
+|公众号关注 |微信点赞 | 支付宝点赞 |
+|:---:|:---:|:---:| 
+| <img src="_image/weixin.png" width="300" title="硅基茶水间"/> | <img src="https://cdn-1258574687.cos.ap-shanghai.myqcloud.com/img/%2F2025%2F07%2F17%2F2ae0a88d98079f7e876c2b4dc85233c6-9e8025.JPG" width="300" title="微信支付"/> | <img src="https://cdn-1258574687.cos.ap-shanghai.myqcloud.com/img/%2F2025%2F07%2F17%2Fed4f20ab8e35be51f8e84c94e6e239b4-fe4947.JPG" width="300" title="支付宝支付"/> |
 
 </div>
 
-
-## 📧 学习交流
-
-<div align="center">
-
-<img src="_image/support.jpg"  title="硅基茶水间留言"/>
-<br>
-<img src="_image/weixin.png" width="600" title="硅基茶水间"/>
-
-</div>
 
 
 ```mermaid
