@@ -1,0 +1,87 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>频率词统计报告</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            h1, h2 { color: #333; }
+            table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            tr:nth-child(even) { background-color: #f9f9f9; }
+            .word { font-weight: bold; }
+            .count { text-align: center; }
+            .percentage { text-align: center; }
+            .titles { max-width: 500px; }
+            .source { color: #666; font-style: italic; }
+            .error { color: #d9534f; }
+            .news-link { 
+                color: #007bff; 
+                text-decoration: none; 
+                border-bottom: 1px dotted #007bff;
+            }
+            .news-link:hover { 
+                color: #0056b3; 
+                text-decoration: underline; 
+            }
+            .news-link:visited { 
+                color: #6f42c1; 
+            }
+            .no-link { 
+                color: #333; 
+            }
+            .new-title {
+                background-color: #fff3cd;
+                border: 1px solid #ffc107;
+                border-radius: 3px;
+                padding: 2px 6px;
+                margin: 2px 0;
+            }
+            .new-section {
+                background-color: #d1ecf1;
+                border: 1px solid #bee5eb;
+                border-radius: 5px;
+                padding: 10px;
+                margin-top: 10px;
+            }
+            .new-section h3 {
+                color: #0c5460;
+                margin-top: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>频率词统计报告</h1>
+    <p>报告类型: 实时分析</p><p>总标题数: 60</p><p>生成时间: 2025-08-07 06:29:22</p>
+        <table>
+            <tr>
+                <th>排名</th>
+                <th>频率词</th>
+                <th>出现次数</th>
+                <th>占比</th>
+                <th>相关标题</th>
+            </tr>
+    
+            <tr>
+                <td>1</td>
+                <td class="word">美股 中美 美债 美联储</td>
+                <td class="count">9</td>
+                <td class="percentage">15.0%</td>
+                <td class="titles"><div class='new-title'>🆕 [金十数据] <a href="https://flash.jin10.com/detail/20250807055816377800" target="_blank" class="news-link">苹果(AAPL.O)美股盘后涨幅扩大至2.7%。</a> <font color='red'><strong>[1]</strong></font> <font color='grey'>- 06时29分</font></div><br><div class='new-title'>🆕 [金十数据] <a href="https://flash.jin10.com/detail/20250807055039096800" target="_blank" class="news-link">美国总统特朗普：贝森特和卢特尼克正在面试美联储候选人。两位凯文都很棒。</a> [6] <font color='grey'>- 06时29分</font></div><br><div class='new-title'>🆕 [金十数据] <a href="https://flash.jin10.com/detail/20250807054947353800" target="_blank" class="news-link">美国总统特朗普：新任美联储理事可能是临时的，将在2-3天内公布任命。</a> [7] <font color='grey'>- 06时29分</font></div><br><div class='new-title'>🆕 [金十数据] <a href="https://flash.jin10.com/detail/20250807054937329800" target="_blank" class="news-link">苹果(AAPL.O)美股盘后涨幅扩大至1%。</a> [8] <font color='grey'>- 06时29分</font></div><br><div class='new-title'>🆕 [金十数据] <a href="https://flash.jin10.com/detail/20250807054757434800" target="_blank" class="news-link">美国总统特朗普：正在开始面试美联储官员人选。候选人降至3人。贝森特不想担任美联储主席。有来自华尔街的候选人。</a> [10] <font color='grey'>- 06时29分</font></div><br><div class='new-title'>🆕 [法布财经] <a href="https://www.fastbull.com/cn/fastshort/3598664_101_1" target="_blank" class="news-link">【行情】台积电Adr美股盘后反弹，涨超2%。</a> [13] <font color='grey'>- 06时29分</font></div><br><div class='new-title'>🆕 [法布财经] <a href="https://www.fastbull.com/cn/fastshort/3598651_101_1" target="_blank" class="news-link">【行情】周三（8月6日）纽约尾盘，美国10年期基准国债收益率涨1.57个基点，报4.2257%，日内交投于4.21%-4.2789%区间，北京时间23:40前后短线显著拉升并刷新日高。两年期美债收益率跌1.05个基点，报3.7137%，日内交投于3.7425%-3.6952%区间。</a> [18] <font color='grey'>- 06时29分</font></div><br><div class='new-title'>🆕 [金十数据] <a href="https://flash.jin10.com/detail/20250807053402548800" target="_blank" class="news-link">美国本土芯片制造商英特尔(INTC.O)美股盘后涨超3%。</a> [27] <font color='grey'>- 06时29分</font></div><br><div class='new-title'>🆕 [金十数据] <a href="https://flash.jin10.com/detail/20250807052702822800" target="_blank" class="news-link">英伟达(NVDA.O)美股盘后跌幅扩大至0.7%。</a> [29] <font color='grey'>- 06时29分</font></div></td>
+            </tr>
+        
+            <tr>
+                <td>2</td>
+                <td class="word">苹果 微软 特斯拉 英伟达 谷歌</td>
+                <td class="count">3</td>
+                <td class="percentage">5.0%</td>
+                <td class="titles"><div class='new-title'>🆕 [华尔街见闻] <a href="https://wallstreetcn.com/articles/3752795" target="_blank" class="news-link">对俄油大买家动手，特朗普下令对印度加征25%关税，据称苹果不受影响</a> [9] <font color='grey'>- 06时29分</font></div><br><div class='new-title'>🆕 [金十数据] <a href="https://flash.jin10.com/detail/20250807054332760800" target="_blank" class="news-link">苹果(AAPL.O)CEO库克：iPhone的最终组装将暂时在美国以外进行。</a> [14] <font color='grey'>- 06时29分</font></div><br><div class='new-title'>🆕 [法布财经] <a href="https://www.fastbull.com/cn/fastshort/3598647_0_1" target="_blank" class="news-link">特朗普提议对海外半导体征收100%关税，鼓励美国本土制造；苹果宣布在美国投资1000亿美元</a> [19] <font color='grey'>- 06时29分</font></div></td>
+            </tr>
+        
+        </table>
+    
+    </body>
+    </html>
+    
