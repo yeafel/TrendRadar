@@ -7,7 +7,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/sansan0/TrendRadar?style=flat-square&logo=github&color=yellow)](https://github.com/sansan0/TrendRadar/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/sansan0/TrendRadar?style=flat-square&logo=github&color=blue)](https://github.com/sansan0/TrendRadar/network/members)
 [![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v2.1.1-green.svg?style=flat-square)](https://github.com/sansan0/TrendRadar)
+[![Version](https://img.shields.io/badge/version-v2.1.2-green.svg?style=flat-square)](https://github.com/sansan0/TrendRadar)
 
 [![企业微信通知](https://img.shields.io/badge/企业微信-通知支持-00D4AA?style=flat-square)](https://work.weixin.qq.com/)
 [![Telegram通知](https://img.shields.io/badge/Telegram-通知支持-00D4AA?style=flat-square)](https://telegram.org/)
@@ -25,7 +25,7 @@
 > 遇到问题提 issues，或【硅基茶水间】公众号留言
 
 <details>
-<summary>👉 点击查看<strong>致谢名单</strong> (当前 <strong>🔥15🔥</strong> 位)</summary>
+<summary>👉 点击查看<strong>致谢名单</strong> (当前 <strong>🔥17🔥</strong> 位)</summary>
 
 ### 数据支持
 
@@ -45,6 +45,8 @@
 
 |           点赞人            |  金额  |  日期  |             备注             |
 | :-------------------------: | :----: | :----: | :-----------------------: |
+|           T*T            |  2  | 2025.9.15  |  点赞         |
+|           *家            |  10  | 2025.9.10  |           |
 |           *X            |  1.11  | 2025.9.3  |           |
 |           *飙            |  20  | 2025.8.31  |  来自老童谢谢         |
 |           *下            |  1  | 2025.8.30  |           |
@@ -61,9 +63,6 @@
 
 </details>
 
-
-<details>
-<summary>👉 <strong>核心功能</strong></summary>
 
 ## ✨ 核心功能
 
@@ -147,7 +146,6 @@ GitHub 一键 Fork 即可使用，无需编程基础。
 
 **典型场景：** 股市投资监控、品牌舆情追踪、行业动态关注、生活资讯获取
 
-</details>
 
 | Github Pages 网页效果(手机端也适配) | 飞书推送效果 |
 |:---:|:---:|
@@ -230,14 +228,19 @@ GitHub 一键 Fork 即可使用，无需编程基础。
 > 
 > 下一次**新功能**，大概会是 ai 分析功能(大概(●'◡'●)
 
+### 2025/09/13 - v2.1.2
+
+- 解决钉钉的推送容量限制导致的新闻推送失败问题(采用分批推送)
+
+
+<details>
+<summary><strong>👉 历史更新</strong></summary>
+
 ### 2025/09/04 - v2.1.1
 
 - 修复docker在某些架构中无法正常运行的问题
 - 正式发布官方 Docker 镜像 wantcat/trendradar，支持多架构
 - 优化 Docker 部署流程，无需本地构建即可快速使用
-
-<details>
-<summary><strong>👉 历史更新</strong></summary>
 
 ### 2025/08/30 - v2.1.0
 
@@ -673,9 +676,7 @@ frequency_words.txt 文件增加了一个【必须词】功能，使用 + 号
     </details>
 
 
-   
-    
-
+     
 
 <details>
 <summary><strong>👉 自定义监控平台</strong></summary>
@@ -715,7 +716,7 @@ docker run -d --name trend-radar \
   -e IMMEDIATE_RUN="true" \
   wantcat/trendradar:latest
 
-# 或者配置环境变量启用推送通知
+# 或者启用手机应用推送通知
 docker run -d --name trend-radar \
   -v ./config:/app/config:ro \
   -v ./output:/app/output \
@@ -759,7 +760,7 @@ wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/frequenc
 1. **创建项目目录和配置**:
    ```bash
    # 创建目录结构
-   mkdir -p trendradar/{config,output}
+   mkdir -p trendradar/{config,docker}
    cd trendradar
    
    # 下载配置文件模板
@@ -770,6 +771,17 @@ wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/frequenc
    wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/docker/.env
    wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/docker/docker-compose.yml
    ```
+
+完成后的目录结构应该是：
+```
+当前目录/
+├── config/
+│   ├── config.yaml
+│   └── frequency_words.txt
+└── docker/
+    ├── .env
+    └── docker-compose.yml
+```
 
 2. **配置文件说明**:
    - `config/config.yaml` - 应用主配置（报告模式、推送设置等）
@@ -928,9 +940,7 @@ weight:
 
 </div>
 
-<details>
-<summary><strong>👉 项目相关推荐</strong></summary>
-<br>
+### 项目相关推荐
 
 > 附项目相关的两篇文章，欢迎留言交流
 
@@ -941,9 +951,18 @@ weight:
 - 如果你有小众需求，完全可以基于我的项目自行开发，零编程基础的也可以试试
 - 我所有的开源项目或多或少都使用了自己写的**AI辅助软件**来提升开发效率，这款工具已开源
 - **核心功能**：迅速筛选项目代码喂给AI，你只需要补充个人需求即可
-- **项目地址**：[https://github.com/sansan0/ai-code-context-helper](https://github.com/sansan0/ai-code-context-helper)
+- **项目地址**：https://github.com/sansan0/ai-code-context-helper
 
-</details>
+### 其余项目
+
+> 📍 毛主席足迹地图 - 交互式动态展示1893-1976年完整轨迹。欢迎诸位同志贡献数据
+
+- https://github.com/sansan0/mao-map
+
+> 哔哩哔哩(bilibili)评论区数据可视化分析软件
+
+- https://github.com/sansan0/bilibili-comment-analyzer
+
 
 <details>
 <summary><strong>👉 微信推送通知方案</strong></summary>
