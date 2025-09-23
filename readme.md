@@ -4,15 +4,18 @@
 
 🚀 最快<strong>30秒</strong>部署的热点助手 —— 告别无效刷屏，只看真正关心的新闻资讯
 
+<a href="https://trendshift.io/repositories/14726" target="_blank"><img src="https://trendshift.io/api/badge/repositories/14726" alt="sansan0%2FTrendRadar | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+
 [![GitHub Stars](https://img.shields.io/github/stars/sansan0/TrendRadar?style=flat-square&logo=github&color=yellow)](https://github.com/sansan0/TrendRadar/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/sansan0/TrendRadar?style=flat-square&logo=github&color=blue)](https://github.com/sansan0/TrendRadar/network/members)
 [![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v2.1.2-green.svg?style=flat-square)](https://github.com/sansan0/TrendRadar)
+[![Version](https://img.shields.io/badge/version-v2.3.1-green.svg?style=flat-square)](https://github.com/sansan0/TrendRadar)
 
-[![企业微信通知](https://img.shields.io/badge/企业微信-通知支持-00D4AA?style=flat-square)](https://work.weixin.qq.com/)
-[![Telegram通知](https://img.shields.io/badge/Telegram-通知支持-00D4AA?style=flat-square)](https://telegram.org/)
-[![dingtalk通知](https://img.shields.io/badge/钉钉-通知支持-00D4AA?style=flat-square)](#)
-[![飞书通知](https://img.shields.io/badge/飞书-通知支持-00D4AA?style=flat-square)](https://www.feishu.cn/)
+[![企业微信通知](https://img.shields.io/badge/企业微信-通知-00D4AA?style=flat-square)](https://work.weixin.qq.com/)
+[![Telegram通知](https://img.shields.io/badge/Telegram-通知-00D4AA?style=flat-square)](https://telegram.org/)
+[![dingtalk通知](https://img.shields.io/badge/钉钉-通知-00D4AA?style=flat-square)](#)
+[![飞书通知](https://img.shields.io/badge/飞书-通知-00D4AA?style=flat-square)](https://www.feishu.cn/)
+[![邮件通知](https://img.shields.io/badge/Email-通知-00D4AA?style=flat-square)](mailto:) 
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-自动化-2088FF?style=flat-square&logo=github-actions&logoColor=white)](https://github.com/sansan0/TrendRadar)
 [![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-部署-4285F4?style=flat-square&logo=github&logoColor=white)](https://sansan0.github.io/TrendRadar)
 [![Docker](https://img.shields.io/badge/Docker-部署-2496ED?style=flat-square&logo=docker&logoColor=white)](https://hub.docker.com/)
@@ -20,12 +23,14 @@
 </div>
 
 
-> 本项目以轻量，易部署为目标，主要处理 issues
->
-> 遇到问题提 issues，或【硅基茶水间】公众号留言
+> 本项目以轻量，易部署为目标
+
+- **详细问题** → 选择 [GitHub Issues](https://github.com/sansan0/TrendRadar/issues)，准备好截图和日志等。 
+- **快速咨询** → 选择【硅基茶水间】公众号文章留言或私信，尽量说清核心问题。
+- 遇到问题可选择以上 2 种方式获得帮助，[点此跳转到两者的区别](#问题答疑与1元点赞)
 
 <details>
-<summary>👉 点击查看<strong>致谢名单</strong> (当前 <strong>🔥17🔥</strong> 位)</summary>
+<summary>👉 点击查看<strong>致谢名单</strong> (当前 <strong>🔥23🔥</strong> 位)</summary>
 
 ### 数据支持
 
@@ -45,6 +50,12 @@
 
 |           点赞人            |  金额  |  日期  |             备注             |
 | :-------------------------: | :----: | :----: | :-----------------------: |
+|           *🍍           |  10  | 2025.9.21  |           |
+|           E*f           |  1  | 2025.9.20  |           |
+|           *记            |  1  | 2025.9.20  |           |
+|           z*u            |  2  | 2025.9.19  |           |
+|           **昊            |  5  | 2025.9.17  |           |
+|           *号            |  1  | 2025.9.15  |           |
 |           T*T            |  2  | 2025.9.15  |  点赞         |
 |           *家            |  10  | 2025.9.10  |           |
 |           *X            |  1.11  | 2025.9.3  |           |
@@ -68,19 +79,40 @@
 
 ### **全网热点聚合**
 
-- 今日头条
-- 百度热搜
-- 华尔街见闻
-- 澎湃新闻
-- bilibili 热搜
-- 财联社热门
-- 凤凰网
-- 贴吧
-- 微博
-- 抖音
 - 知乎
+- 抖音
+- bilibili 热搜
+- 华尔街见闻
+- 贴吧
+- 百度热搜
+- 财联社热门
+- 澎湃新闻
+- 凤凰网
+- 今日头条
+- 微博
 
-默认监控 11 个主流平台，如想额外增加，可看最下方的**自定义监控平台**
+默认监控 11 个主流平台，如想额外增加其它平台，可自行增加
+
+<details>
+<summary><strong>👉 自定义监控平台</strong></summary>
+
+### 🔧 自定义监控平台
+
+本项目的资讯数据来源于 [newsnow](https://github.com/ourongxing/newsnow) ，你可以点击[网站](https://newsnow.busiyi.world/)，点击[更多]，查看是否有你想要的平台。 
+
+具体添加可访问 [项目源代码](https://github.com/ourongxing/newsnow/tree/main/server/sources)，根据里面的文件名，在 `config/config.yaml` 文件中修改 `platforms` 配置：
+
+```yaml
+platforms:
+  - id: "toutiao"
+    name: "今日头条"
+  - id: "baidu"  
+    name: "百度热搜"
+  - id: "wallstreetcn-hot"
+    name: "华尔街见闻"
+  # 添加更多平台...
+```
+</details>
 
 ### **智能推送策略**
 
@@ -117,11 +149,50 @@
 
 **实际效果**：把分散在各个平台的热搜合并起来，按照你关心的热度重新排序
 
-> 这三个比例可以选择适合自己的场景进行调整，具体见【热点权重调整】
+> 这三个比例可以选择适合自己的场景进行调整
+
+<details>
+<summary><strong>👉 热点权重调整</strong></summary>
+<br>
+
+当前默认的配置是平衡性配置
+
+### 两个核心场景
+
+**追实时热点型**：
+```yaml
+weight:
+  rank_weight: 0.8    # 主要看排名
+  frequency_weight: 0.1  # 不太在乎持续性
+  hotness_weight: 0.1
+```
+**适用人群**：自媒体博主、营销人员、想快速了解当下最火话题的用户
+
+**追深度话题型**：
+```yaml
+weight:
+  rank_weight: 0.4    # 适度看排名
+  frequency_weight: 0.5  # 重视当天内的持续热度
+  hotness_weight: 0.1
+```
+**适用人群**：投资者、研究人员、新闻工作者、需要深度分析趋势的用户
+
+### 调整的方法
+1. **三个数字加起来必须等于 1.0**
+2. **哪个重要就调大哪个**：在乎排名就调大 rank_weight，在乎持续性就调大 frequency_weight
+3. **建议每次只调 0.1-0.2**，观察效果
+
+核心思路：追求速度和时效性的用户提高排名权重，追求深度和稳定性的用户提高频次权重。
+
+</details>
 
 ### **多渠道实时推送**
 
-支持**企业微信**、**飞书**、**钉钉**、**Telegram**，消息直达手机
+支持**企业微信**(+ 微信推送方案)、**飞书**、**钉钉**、**Telegram**、**邮件**，消息直达手机和邮箱
+
+- **邮件推送**：支持 QQ邮箱、Gmail、Outlook、163邮箱等主流邮箱服务
+- **智能识别**：自动识别邮箱服务商，也可以手动配置 SMTP 服务器
+- **HTML 格式**：精美的 HTML 邮件格式，与网页版效果一致
 
 ### **多端适配**
 - **GitHub Pages**：自动生成精美网页报告，PC/移动端适配
@@ -132,7 +203,7 @@
 
 GitHub 一键 Fork 即可使用，无需编程基础。
 
-> 30秒部署： GitHub Pages（网页浏览）
+> 30秒部署： GitHub Pages（网页浏览）支持一键保存成图片，随时分享给他人
 >
 > 1分钟部署： 企业微信（手机通知）
 
@@ -147,7 +218,7 @@ GitHub 一键 Fork 即可使用，无需编程基础。
 **典型场景：** 股市投资监控、品牌舆情追踪、行业动态关注、生活资讯获取
 
 
-| Github Pages 网页效果(手机端也适配) | 飞书推送效果 |
+| Github Pages 效果(手机端适配、邮箱推送效果) | 飞书推送效果 |
 |:---:|:---:|
 | ![Github Pages效果](_image/github-pages.png) | ![飞书推送效果](_image/feishu.jpg) |
 
@@ -212,29 +283,54 @@ GitHub 一键 Fork 即可使用，无需编程基础。
 
 ## 📝 更新日志
 
->**升级说明：** 
-- **注意**：请通过以下方式更新项目(或根据**更新提示**升级)，不要通过 Sync fork 更新
-- **小版本更新**：一般情况，直接在 GitHub 网页编辑器中，用本项目的 `main.py` 代码替换你 fork 仓库中的对应文件 
-- **大版本升级**：从 v1.x 升级到 v2.0 建议删除现有 fork 后重新 fork，这样更省力且避免配置冲突
+>**升级说明**：
+- **提示**：不要通过 **Sync fork** 更新本项目, 建议查看【历史更新】，明确具体的【升级方式】和【功能内容】
+- **小版本更新**：从 v2.x 升级到 v2.y, 用本项目的 `main.py` 代码替换你 fork 仓库中的对应文件 
+- **大版本升级**：从 v1.x 升级到 v2.y, 建议删除现有 fork 后重新 fork，这样更省力且避免配置冲突
 
 
-> 感谢各位朋友的支持与厚爱，特别感谢：
+> **感谢**：
+- **fork 并为项目点 star** 的观众们，你们的认可是我前进的动力
+- **关注公众号并积极互动** 的读者们，你们的留言和点赞让内容更有温度
+- **给予资金点赞支持** 的朋友们，你们的慷慨让项目得以持续发展
 > 
-> **fork 并为项目点 star** 的观众们，你们的认可是我前进的动力
-> 
-> **关注公众号并积极互动** 的读者们，你们的留言和点赞让内容更有温度
-> 
-> **给予资金点赞支持** 的朋友们，你们的慷慨让项目得以持续发展
-> 
-> 下一次**新功能**，大概会是 ai 分析功能(大概(●'◡'●)
+> 下一次**新功能**，大概会是 ai 分析功能(●'◡'●)
 
-### 2025/09/13 - v2.1.2
+### 2025/09/22 - v2.3.1
 
-- 解决钉钉的推送容量限制导致的新闻推送失败问题(采用分批推送)
+- **新增邮件推送功能**，支持将热点新闻报告发送到邮箱
+- **智能 SMTP 识别**：自动识别 Gmail、QQ邮箱、Outlook、网易邮箱等 10+ 种邮箱服务商配置
+- **HTML 精美格式**：邮件内容采用与网页版相同的 HTML 格式，排版精美，移动端适配
+- **批量发送支持**：支持多个收件人，用逗号分隔即可同时发送给多人
+- **自定义 SMTP**：可自定义 SMTP 服务器和端口
+
+**使用说明**：
+- 适用场景：适合需要邮件归档、团队分享、定时报告的用户
+- 注意事项：为防止邮件群发功能被**滥用**，当前的群发是所有收件人都能看到彼此的邮箱地址，适合熟人间交流资讯
+
+**支持的邮箱服务**：
+- Gmail、QQ邮箱、Outlook/Hotmail、163/126邮箱、新浪邮箱、搜狐邮箱等
+
+**更新提示**：
+- 此次更新的内容比较多，建议删除原有 fork, 重新 fork 并配置
 
 
 <details>
 <summary><strong>👉 历史更新</strong></summary>
+
+### 2025/09/17 - v2.2.0
+
+- 新增一键保存新闻图片功能，让你轻松分享关注的热点
+
+**使用说明**：
+- 适用场景：当你按照教程开启了网页版功能后(GitHub Pages)
+- 使用方法：用手机或电脑打开该网页链接，点击页面顶部的"保存为图片"按钮
+- 实际效果：系统会自动将当前的新闻报告制作成一张精美图片，保存到你的手机相册或电脑桌面
+- 分享便利：你可以直接把这张图片发给朋友、发到朋友圈，或分享到工作群，让别人也能看到你发现的重要资讯
+
+### 2025/09/13 - v2.1.2
+
+- 解决钉钉的推送容量限制导致的新闻推送失败问题(采用分批推送)
 
 ### 2025/09/04 - v2.1.1
 
@@ -510,6 +606,49 @@ frequency_words.txt 文件增加了一个【必须词】功能，使用 + 号
       - `TELEGRAM_CHAT_ID`：填入第 2 步获得的 Chat ID
    </details>
 
+   <details>
+   <summary> <strong>👉 邮件推送</strong>（支持所有主流邮箱）</summary>
+   <br>
+
+   - 注意事项：为防止邮件群发功能被**滥用**，当前的群发是所有收件人都能看到彼此的邮箱地址，适合熟人间交流资讯。
+   - 仅供参考：请根据实际情况调整，邮箱方面并没有一一验证，是按照 SMTP 的标准配置的 
+
+   **GitHub Secret 配置：**
+   - 名称：`EMAIL_FROM` - 发件人邮箱地址
+   - 名称：`EMAIL_PASSWORD` - 邮箱密码或授权码
+   - 名称：`EMAIL_TO` - 收件人邮箱地址（多个收件人用英文逗号分隔）
+   - 名称：`EMAIL_SMTP_SERVER` - SMTP服务器地址（可选，留空则自动识别）
+   - 名称：`EMAIL_SMTP_PORT` - SMTP端口（可选，留空则自动识别）
+
+   **常见邮箱设置：**
+
+   #### QQ邮箱：
+   1. 登录 QQ邮箱网页版 → 设置 → 账户
+   2. 开启 POP3/SMTP 服务
+   3. 生成授权码（16位字母）
+   4. `EMAIL_PASSWORD` 填写授权码，而非 QQ 密码
+
+   #### Gmail：
+   1. 开启两步验证
+   2. 生成应用专用密码
+   3. `EMAIL_PASSWORD` 填写应用专用密码
+
+   #### 163/126邮箱：
+   1. 登录网页版 → 设置 → POP3/SMTP/IMAP
+   2. 开启 SMTP 服务
+   3. 设置客户端授权码
+   4. `EMAIL_PASSWORD` 填写授权码
+
+   **高级配置**：
+   如果自动识别失败，可手动配置 SMTP：
+   - `EMAIL_SMTP_SERVER`：如 smtp.gmail.com
+   - `EMAIL_SMTP_PORT`：如 587（TLS）或 465（SSL）
+
+   **多收件人设置**：
+   - EMAIL_TO="user1@example.com,user2@example.com,user3@example.com"
+
+   </details>
+
 3. **主要配置**:
 
     - **推送设置：** : 在 [config/config.yaml](config/config.yaml) 中进行，可根据里面的描述文字操作，这里不重复了
@@ -676,28 +815,6 @@ frequency_words.txt 文件增加了一个【必须词】功能，使用 + 号
     </details>
 
 
-     
-
-<details>
-<summary><strong>👉 自定义监控平台</strong></summary>
-
-### 🔧 自定义监控平台
-
-本项目的资讯数据来源于 [newsnow](https://github.com/ourongxing/newsnow) ，你可以点击[网站](https://newsnow.busiyi.world/)，点击[更多]，查看是否有你想要的平台。 
-
-具体添加可访问 [项目源代码](https://github.com/ourongxing/newsnow/tree/main/server/sources)，根据里面的文件名，在 `config/config.yaml` 文件中修改 `platforms` 配置：
-
-```yaml
-platforms:
-  - id: "toutiao"
-    name: "今日头条"
-  - id: "baidu"  
-    name: "百度热搜"
-  - id: "wallstreetcn-hot"
-    name: "华尔街见闻"
-  # 添加更多平台...
-```
-</details>
 
 <details>
 <summary><strong>👉 Docker 部署</strong></summary>
@@ -716,7 +833,7 @@ docker run -d --name trend-radar \
   -e IMMEDIATE_RUN="true" \
   wantcat/trendradar:latest
 
-# 或者启用手机应用推送通知
+# 或者启用手机应用推送通知或邮件通知
 docker run -d --name trend-radar \
   -v ./config:/app/config:ro \
   -v ./output:/app/output \
@@ -725,6 +842,9 @@ docker run -d --name trend-radar \
   -e WEWORK_WEBHOOK_URL="你的企业微信webhook" \
   -e TELEGRAM_BOT_TOKEN="你的telegram_bot_token" \
   -e TELEGRAM_CHAT_ID="你的telegram_chat_id" \
+  -e EMAIL_FROM="你的发件邮箱" \
+  -e EMAIL_PASSWORD="你的邮箱密码或授权码" \
+  -e EMAIL_TO="收件人邮箱" \
   -e CRON_SCHEDULE="*/30 * * * *" \
   -e RUN_MODE="cron" \
   -e IMMEDIATE_RUN="true" \
@@ -892,62 +1012,29 @@ docker exec -it trend-radar ls -la /app/config/
 
 </details>
 
-<details>
-<summary><strong>👉 热点权重调整</strong></summary>
-<br>
 
-当前默认的配置是平衡性配置
+## ☕问题答疑与1元点赞
 
-### 两个核心场景
-
-**追实时热点型**：
-```yaml
-weight:
-  rank_weight: 0.8    # 主要看排名
-  frequency_weight: 0.1  # 不太在乎持续性
-  hotness_weight: 0.1
-```
-**适用人群**：自媒体博主、营销人员、想快速了解当下最火话题的用户
-
-**追深度话题型**：
-```yaml
-weight:
-  rank_weight: 0.4    # 适度看排名
-  frequency_weight: 0.5  # 重视当天内的持续热度
-  hotness_weight: 0.1
-```
-**适用人群**：投资者、研究人员、新闻工作者、需要深度分析趋势的用户
-
-### 调整的方法
-1. **三个数字加起来必须等于 1.0**
-2. **哪个重要就调大哪个**：在乎排名就调大 rank_weight，在乎持续性就调大 frequency_weight
-3. **建议每次只调 0.1-0.2**，观察效果
-
-核心思路：追求速度和时效性的用户提高排名权重，追求深度和稳定性的用户提高频次权重。
-
-</details>
-
-
-## ☕ 学习交流与1元点赞
-
-> 心意到就行，收到的点赞用于提高开发者开源的积极性
-
-<div align="center">
+> 心意到就行，收到的**点赞**用于提高开发者开源的积极性。你们的**点赞**已记录于最顶部的【致谢名单】
 
 |公众号关注 |微信点赞 | 支付宝点赞 |
 |:---:|:---:|:---:| 
 | <img src="_image/weixin.png" width="300" title="硅基茶水间"/> | <img src="https://cdn-1258574687.cos.ap-shanghai.myqcloud.com/img/%2F2025%2F07%2F17%2F2ae0a88d98079f7e876c2b4dc85233c6-9e8025.JPG" width="300" title="微信支付"/> | <img src="https://cdn-1258574687.cos.ap-shanghai.myqcloud.com/img/%2F2025%2F07%2F17%2Fed4f20ab8e35be51f8e84c94e6e239b4-fe4947.JPG" width="300" title="支付宝支付"/> |
 
-</div>
+| 答疑方式 | 适用场景 | 响应时间 | 详细程度 | 社区参与度 | 如何提问 |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| **GitHub Issues** | 部署配置问题<br/>功能异常 | 1-2天内 | 针对性强 | **公开讨论**<br/>其他用户可参与<br/>问题记录可搜索 | 📋 **提供完整信息**：<br/>• 尽量截图<br/>• 错误日志<br/>• 系统环境等等 |
+| **公众号交流** | 快速咨询<br/>使用疑问<br/>功能了解 | 几小时 | 简要指导 | 可以文章下留言<br/>也可以私信交流 | 💡 **抓住问题核心**：<br/>• 一句话描述问题<br/>• 说明想要的效果 |
 
-### 项目相关推荐
+### 项目相关
 
-> 附项目相关的两篇文章，欢迎留言交流
+> **3 篇文章**：
 
+- [可在该文章下方留言，方便项目作者用手机答疑](https://mp.weixin.qq.com/s/KYEPfTPVzZNWFclZh4am_g)
 - [2个月破 1000 star，我的GitHub项目推广实战经验](https://mp.weixin.qq.com/s/jzn0vLiQFX408opcfpPPxQ)
 - [基于本项目，如何开展公众号或者新闻资讯类文章写作](https://mp.weixin.qq.com/s/8ghyfDAtQZjLrnWTQabYOQ)
 
->**AI 开发：**
+>**AI 开发**：
 - 如果你有小众需求，完全可以基于我的项目自行开发，零编程基础的也可以试试
 - 我所有的开源项目或多或少都使用了自己写的**AI辅助软件**来提升开发效率，这款工具已开源
 - **核心功能**：迅速筛选项目代码喂给AI，你只需要补充个人需求即可

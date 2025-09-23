@@ -6,6 +6,11 @@ import random
 import re
 import time
 import webbrowser
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.header import Header
+from email.utils import formataddr, formatdate, make_msgid
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional, Union
@@ -15,8 +20,68 @@ import requests
 import yaml
 
 
-VERSION = "2.1.2"
+VERSION = "2.3.1"
 
+
+# === SMTP邮件配置 ===
+SMTP_CONFIGS = {
+    # Gmail
+    'gmail.com': {
+        'server': 'smtp.gmail.com',
+        'port': 587,
+        'encryption': 'TLS'
+    },
+    
+    # QQ邮箱
+    'qq.com': {
+        'server': 'smtp.qq.com', 
+        'port': 587,
+        'encryption': 'TLS'
+    },
+    
+    # Outlook
+    'outlook.com': {
+        'server': 'smtp-mail.outlook.com',
+        'port': 587,
+        'encryption': 'TLS'
+    },
+    'hotmail.com': {
+        'server': 'smtp-mail.outlook.com',
+        'port': 587,
+        'encryption': 'TLS'
+    },
+    'live.com': {
+        'server': 'smtp-mail.outlook.com',
+        'port': 587,
+        'encryption': 'TLS'
+    },
+    
+    # 网易邮箱
+    '163.com': {
+        'server': 'smtp.163.com',
+        'port': 587,
+        'encryption': 'TLS'
+    },
+    '126.com': {
+        'server': 'smtp.126.com',
+        'port': 587,
+        'encryption': 'TLS'
+    },
+    
+    # 新浪邮箱
+    'sina.com': {
+        'server': 'smtp.sina.com',
+        'port': 587,
+        'encryption': 'TLS'
+    },
+    
+    # 搜狐邮箱
+    'sohu.com': {
+        'server': 'smtp.sohu.com',
+        'port': 587,
+        'encryption': 'TLS'
+    }
+}
 
 # === 配置管理 ===
 def load_config():
@@ -96,6 +161,23 @@ def load_config():
     config["TELEGRAM_CHAT_ID"] = os.environ.get(
         "TELEGRAM_CHAT_ID", ""
     ).strip() or webhooks.get("telegram_chat_id", "")
+    
+    # 邮件配置
+    config["EMAIL_FROM"] = os.environ.get(
+        "EMAIL_FROM", ""
+    ).strip() or webhooks.get("email_from", "")
+    config["EMAIL_PASSWORD"] = os.environ.get(
+        "EMAIL_PASSWORD", ""
+    ).strip() or webhooks.get("email_password", "")
+    config["EMAIL_TO"] = os.environ.get(
+        "EMAIL_TO", ""
+    ).strip() or webhooks.get("email_to", "")
+    config["EMAIL_SMTP_SERVER"] = os.environ.get(
+        "EMAIL_SMTP_SERVER", ""
+    ).strip() or webhooks.get("email_smtp_server", "")
+    config["EMAIL_SMTP_PORT"] = os.environ.get(
+        "EMAIL_SMTP_PORT", ""
+    ).strip() or webhooks.get("email_smtp_port", "")
 
     # 输出配置来源信息
     webhook_sources = []
@@ -114,7 +196,10 @@ def load_config():
         )
         chat_source = "环境变量" if os.environ.get("TELEGRAM_CHAT_ID") else "配置文件"
         webhook_sources.append(f"Telegram({token_source}/{chat_source})")
-
+    if config["EMAIL_FROM"] and config["EMAIL_PASSWORD"] and config["EMAIL_TO"]:
+        from_source = "环境变量" if os.environ.get("EMAIL_FROM") else "配置文件"
+        webhook_sources.append(f"邮件({from_source})")
+        
     if webhook_sources:
         print(f"Webhook 配置来源: {', '.join(webhook_sources)}")
     else:
@@ -1464,6 +1549,7 @@ def generate_html_report(
     id_to_name: Optional[Dict] = None,
     mode: str = "daily",
     is_daily_summary: bool = False,
+    update_info: Optional[Dict] = None,
 ) -> str:
     """生成HTML报告"""
     if is_daily_summary:
@@ -1481,7 +1567,7 @@ def generate_html_report(
     report_data = prepare_report_data(stats, failed_ids, new_titles, id_to_name, mode)
 
     html_content = render_html_content(
-        report_data, total_titles, is_daily_summary, mode
+        report_data, total_titles, is_daily_summary, mode, update_info
     )
 
     with open(file_path, "w", encoding="utf-8") as f:
@@ -1500,6 +1586,7 @@ def render_html_content(
     total_titles: int,
     is_daily_summary: bool = False,
     mode: str = "daily",
+    update_info: Optional[Dict] = None,
 ) -> str:
     """渲染HTML内容"""
     html = """
@@ -1509,6 +1596,7 @@ def render_html_content(
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>热点新闻分析</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <style>
             * { box-sizing: border-box; }
             body { 
@@ -1534,6 +1622,33 @@ def render_html_content(
                 color: white;
                 padding: 32px 24px;
                 text-align: center;
+                position: relative;
+            }
+            
+            .save-btn {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                background: rgba(255, 255, 255, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                color: white;
+                padding: 8px 16px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 13px;
+                font-weight: 500;
+                transition: all 0.2s ease;
+                backdrop-filter: blur(10px);
+            }
+            
+            .save-btn:hover {
+                background: rgba(255, 255, 255, 0.3);
+                border-color: rgba(255, 255, 255, 0.5);
+                transform: translateY(-1px);
+            }
+            
+            .save-btn:active {
+                transform: translateY(0);
             }
             
             .header-title {
@@ -1837,22 +1952,63 @@ def render_html_content(
                 font-family: 'SF Mono', Consolas, monospace;
             }
             
+            .footer {
+                margin-top: 32px;
+                padding: 20px 24px;
+                background: #f8f9fa;
+                border-top: 1px solid #e5e7eb;
+                text-align: center;
+            }
+            
+            .footer-content {
+                font-size: 13px;
+                color: #6b7280;
+                line-height: 1.6;
+            }
+            
+            .footer-link {
+                color: #4f46e5;
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.2s ease;
+            }
+            
+            .footer-link:hover {
+                color: #7c3aed;
+                text-decoration: underline;
+            }
+            
+            .project-name {
+                font-weight: 600;
+                color: #374151;
+            }
+            
             @media (max-width: 480px) {
                 body { padding: 12px; }
                 .header { padding: 24px 20px; }
                 .content { padding: 20px; }
+                .footer { padding: 16px 20px; }
                 .header-info { grid-template-columns: 1fr; gap: 12px; }
                 .news-header { gap: 6px; }
                 .news-content { padding-right: 45px; }
                 .news-item { gap: 8px; }
                 .new-item { gap: 8px; }
                 .news-number { width: 20px; height: 20px; font-size: 12px; }
+                .save-btn {
+                    position: static;
+                    margin-bottom: 16px;
+                    display: block;
+                    width: fit-content;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
             }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="header">
+                <button class="save-btn" onclick="saveAsImage()">保存为图片</button>
                 <div class="header-title">热点新闻分析</div>
                 <div class="header-info">
                     <div class="info-item">
@@ -2082,7 +2238,104 @@ def render_html_content(
 
     html += """
             </div>
+            
+            <div class="footer">
+                <div class="footer-content">
+                    由 <span class="project-name">TrendRadar</span> 生成 · 
+                    <a href="https://github.com/sansan0/TrendRadar" target="_blank" class="footer-link">
+                        GitHub 开源项目
+                    </a>"""
+                    
+    if update_info:
+        html += f"""
+                    <br>
+                    <span style="color: #ea580c; font-weight: 500;">
+                        发现新版本 {update_info['remote_version']}，当前版本 {update_info['current_version']}
+                    </span>"""
+
+    html += """
+                </div>
+            </div>
         </div>
+        
+        <script>
+            async function saveAsImage() {
+                const button = document.querySelector('.save-btn');
+                const originalText = button.textContent;
+                
+                try {
+                    button.textContent = '生成中...';
+                    button.disabled = true;
+                    window.scrollTo(0, 0);
+                    
+                    // 等待页面稳定
+                    await new Promise(resolve => setTimeout(resolve, 200));
+                    
+                    // 截图前隐藏按钮
+                    button.style.visibility = 'hidden';
+                    
+                    // 再次等待确保按钮完全隐藏
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    
+                    const container = document.querySelector('.container');
+                    
+                    // 获取容器的精确位置和尺寸
+                    const rect = container.getBoundingClientRect();
+                    const computedStyle = window.getComputedStyle(container);
+                    
+                    const canvas = await html2canvas(container, {
+                        backgroundColor: '#ffffff',
+                        scale: 1.5,
+                        useCORS: true,
+                        allowTaint: false,
+                        imageTimeout: 10000,
+                        removeContainer: false,
+                        foreignObjectRendering: false,
+                        logging: false,
+                        width: container.offsetWidth,
+                        height: container.offsetHeight,
+                        x: 0,
+                        y: 0,
+                        scrollX: 0,
+                        scrollY: 0,
+                        windowWidth: window.innerWidth,
+                        windowHeight: window.innerHeight
+                    });
+                    
+                    button.style.visibility = 'visible';
+                    
+                    const link = document.createElement('a');
+                    const now = new Date();
+                    const filename = `TrendRadar_热点新闻分析_${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}.png`;
+                    
+                    link.download = filename;
+                    link.href = canvas.toDataURL('image/png', 1.0);
+                    
+                    // 触发下载
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    button.textContent = '保存成功!';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.disabled = false;
+                    }, 2000);
+                    
+                } catch (error) {
+                    button.style.visibility = 'visible';
+                    button.textContent = '保存失败';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.disabled = false;
+                    }, 2000);
+                }
+            }
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                window.scrollTo(0, 0);
+            });
+        </script>
     </body>
     </html>
     """
@@ -2666,6 +2919,7 @@ def send_to_webhooks(
     update_info: Optional[Dict] = None,
     proxy_url: Optional[str] = None,
     mode: str = "daily",
+    html_file_path: Optional[str] = None,
 ) -> Dict[str, bool]:
     """发送数据到多个webhook平台"""
     results = {}
@@ -2694,6 +2948,11 @@ def send_to_webhooks(
     wework_url = CONFIG["WEWORK_WEBHOOK_URL"]
     telegram_token = CONFIG["TELEGRAM_BOT_TOKEN"]
     telegram_chat_id = CONFIG["TELEGRAM_CHAT_ID"]
+    email_from = CONFIG["EMAIL_FROM"]
+    email_password = CONFIG["EMAIL_PASSWORD"]
+    email_to = CONFIG["EMAIL_TO"]
+    email_smtp_server = CONFIG.get("EMAIL_SMTP_SERVER", "")
+    email_smtp_port = CONFIG.get("EMAIL_SMTP_PORT", "")
 
     update_info_to_send = update_info if CONFIG["SHOW_VERSION_UPDATE"] else None
 
@@ -2725,6 +2984,18 @@ def send_to_webhooks(
             update_info_to_send,
             proxy_url,
             mode,
+        )
+
+    # 发送邮件
+    if email_from and email_password and email_to:
+        results["email"] = send_to_email(
+            email_from,
+            email_password,
+            email_to,
+            report_type,
+            html_file_path,
+            email_smtp_server,
+            email_smtp_port,
         )
 
     if not results:
@@ -2999,6 +3270,137 @@ def send_to_telegram(
     print(f"Telegram所有 {len(batches)} 批次发送完成 [{report_type}]")
     return True
 
+def send_to_email(
+    from_email: str,
+    password: str,
+    to_email: str,
+    report_type: str,
+    html_file_path: str,
+    custom_smtp_server: Optional[str] = None,
+    custom_smtp_port: Optional[int] = None,
+) -> bool:
+    """发送邮件通知"""
+    try:
+        if not html_file_path or not Path(html_file_path).exists():
+            print(f"错误：HTML文件不存在或未提供: {html_file_path}")
+            return False
+            
+        print(f"使用HTML文件: {html_file_path}")
+        with open(html_file_path, "r", encoding="utf-8") as f:
+            html_content = f.read()
+        
+        domain = from_email.split('@')[-1].lower()
+        
+        if custom_smtp_server and custom_smtp_port:
+            # 使用自定义 SMTP 配置
+            smtp_server = custom_smtp_server
+            smtp_port = int(custom_smtp_port)
+            use_tls = smtp_port == 587
+        elif domain in SMTP_CONFIGS:
+            # 使用预设配置
+            config = SMTP_CONFIGS[domain]
+            smtp_server = config['server']
+            smtp_port = config['port']
+            use_tls = config['encryption'] == 'TLS'
+        else:
+            print(f"未识别的邮箱服务商: {domain}，使用通用 SMTP 配置")
+            smtp_server = f"smtp.{domain}"
+            smtp_port = 587
+            use_tls = True
+        
+        msg = MIMEMultipart('alternative')
+        
+        # 严格按照 RFC 标准设置 From header
+        sender_name = "TrendRadar"
+        msg['From'] = formataddr((sender_name, from_email))
+        
+        # 设置收件人
+        recipients = [addr.strip() for addr in to_email.split(',')]
+        if len(recipients) == 1:
+            msg['To'] = recipients[0]
+        else:
+            msg['To'] = ', '.join(recipients)
+        
+        # 设置邮件主题
+        now = get_beijing_time()
+        subject = f"TrendRadar 热点分析报告 - {report_type} - {now.strftime('%m月%d日 %H:%M')}"
+        msg['Subject'] = Header(subject, 'utf-8')
+        
+        # 设置其他标准 header
+        msg['MIME-Version'] = '1.0'
+        msg['Date'] = formatdate(localtime=True)
+        msg['Message-ID'] = make_msgid()
+        
+        # 添加纯文本部分（作为备选）
+        text_content = f"""
+TrendRadar 热点分析报告
+========================
+报告类型：{report_type}
+生成时间：{now.strftime('%Y-%m-%d %H:%M:%S')}
+
+请使用支持HTML的邮件客户端查看完整报告内容。
+        """
+        text_part = MIMEText(text_content, 'plain', 'utf-8')
+        msg.attach(text_part)
+        
+        html_part = MIMEText(html_content, 'html', 'utf-8')
+        msg.attach(html_part)
+        
+        print(f"正在发送邮件到 {to_email}...")
+        print(f"SMTP 服务器: {smtp_server}:{smtp_port}")
+        print(f"发件人: {from_email}")
+        
+        try:
+            if use_tls:
+                # TLS 模式
+                server = smtplib.SMTP(smtp_server, smtp_port, timeout=30)
+                server.set_debuglevel(0)  # 设为1可以查看详细调试信息
+                server.ehlo()
+                server.starttls()
+                server.ehlo()
+            else:
+                # SSL 模式
+                server = smtplib.SMTP_SSL(smtp_server, smtp_port, timeout=30)
+                server.set_debuglevel(0)
+                server.ehlo()
+            
+            # 登录
+            server.login(from_email, password)
+            
+            # 发送邮件
+            server.send_message(msg)
+            server.quit()
+            
+            print(f"邮件发送成功 [{report_type}] -> {to_email}")
+            return True
+            
+        except smtplib.SMTPServerDisconnected:
+            print(f"邮件发送失败：服务器意外断开连接，请检查网络或稍后重试")
+            return False
+            
+    except smtplib.SMTPAuthenticationError as e:
+        print(f"邮件发送失败：认证错误，请检查邮箱和密码/授权码")
+        print(f"详细错误: {str(e)}")
+        return False
+    except smtplib.SMTPRecipientsRefused as e:
+        print(f"邮件发送失败：收件人地址被拒绝 {e}")
+        return False
+    except smtplib.SMTPSenderRefused as e:
+        print(f"邮件发送失败：发件人地址被拒绝 {e}")
+        return False
+    except smtplib.SMTPDataError as e:
+        print(f"邮件发送失败：邮件数据错误 {e}")
+        return False
+    except smtplib.SMTPConnectError as e:
+        print(f"邮件发送失败：无法连接到 SMTP 服务器 {smtp_server}:{smtp_port}")
+        print(f"详细错误: {str(e)}")
+        return False
+    except Exception as e:
+        print(f"邮件发送失败 [{report_type}]：{e}")
+        import traceback
+        traceback.print_exc()
+        return False
+
 
 # === 主分析器 ===
 class NewsAnalyzer:
@@ -3217,6 +3619,7 @@ class NewsAnalyzer:
             id_to_name=id_to_name,
             mode=mode,
             is_daily_summary=is_daily_summary,
+            update_info=self.update_info if CONFIG["SHOW_VERSION_UPDATE"] else None,
         )
 
         return stats, html_file
@@ -3229,6 +3632,7 @@ class NewsAnalyzer:
         failed_ids: Optional[List] = None,
         new_titles: Optional[Dict] = None,
         id_to_name: Optional[Dict] = None,
+        html_file_path: Optional[str] = None,
     ) -> bool:
         """统一的通知发送逻辑，包含所有判断条件"""
         has_webhook = self._has_webhook_configured()
@@ -3247,6 +3651,7 @@ class NewsAnalyzer:
                 self.update_info,
                 self.proxy_url,
                 mode=mode,
+                html_file_path=html_file_path, 
             )
             return True
         elif CONFIG["ENABLE_NOTIFICATION"] and not has_webhook:
@@ -3299,14 +3704,16 @@ class NewsAnalyzer:
         )
 
         print(f"{summary_type}报告已生成: {html_file}")
-
+        
         # 发送通知
         self._send_notification_if_needed(
             stats,
             mode_strategy["summary_report_type"],
             mode_strategy["summary_mode"],
+            failed_ids=[],
             new_titles=new_titles,
             id_to_name=id_to_name,
+            html_file_path=html_file, 
         )
 
         return html_file
@@ -3439,6 +3846,7 @@ class NewsAnalyzer:
                         failed_ids=failed_ids,
                         new_titles=historical_new_titles,
                         id_to_name=combined_id_to_name,
+                        html_file_path=html_file,
                     )
             else:
                 print("❌ 严重错误：无法读取刚保存的数据文件")
@@ -3467,6 +3875,7 @@ class NewsAnalyzer:
                     failed_ids=failed_ids,
                     new_titles=new_titles,
                     id_to_name=id_to_name,
+                    html_file_path=html_file,
                 )
 
         # 生成汇总报告（如果需要）
